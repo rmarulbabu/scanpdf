@@ -193,51 +193,6 @@ header h1 {
     text-align: center;
 }
 
-/* API Key Section */
-.api-key-section {
-    padding: 30px;
-    background: #f8f9fa;
-    border-top: 1px solid #dee2e6;
-}
-
-.api-key-container {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.api-key-container label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: 600;
-    color: #495057;
-}
-
-.api-key-container input {
-    width: 100%;
-    padding: 12px;
-    border: 2px solid #dee2e6;
-    border-radius: 8px;
-    font-size: 1rem;
-    margin-bottom: 10px;
-    transition: border-color 0.3s;
-}
-
-.api-key-container input:focus {
-    outline: none;
-    border-color: #667eea;
-}
-
-.api-key-container button {
-    width: 100%;
-    margin-bottom: 10px;
-}
-
-.api-key-hint {
-    font-size: 0.85rem;
-    color: #6c757d;
-    text-align: center;
-}
-
 /* Editor Section */
 .editor-section {
     padding: 30px;

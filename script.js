@@ -17,13 +17,10 @@ const loadingIndicator = document.getElementById('loadingIndicator');
 const errorMessage = document.getElementById('errorMessage');
 const editorSection = document.getElementById('editorSection');
 const exportPdfBtn = document.getElementById('exportPdfBtn');
-const apiKeyInput = document.getElementById('apiKeyInput');
-const saveApiKeyBtn = document.getElementById('saveApiKeyBtn');
 const cameraSection = document.getElementById('cameraSection');
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
-    loadApiKey();
     initEditor();
     setupEventListeners();
 });
@@ -36,26 +33,24 @@ function setupEventListeners() {
     retakeFromPreviewBtn.addEventListener('click', retakePhoto);
     processBtn.addEventListener('click', processImage);
     exportPdfBtn.addEventListener('click', exportToPDF);
-    saveApiKeyBtn.addEventListener('click', saveApiKey);
 }
 
-// Load API key from localStorage
-function loadApiKey() {
-    const savedKey = localStorage.getItem('gcp_vision_api_key');
-    if (savedKey) {
-        apiKeyInput.value = savedKey;
+// Get API key from localStorage or prompt user
+function getApiKey() {
+    let apiKey = localStorage.getItem('gcp_vision_api_key');
+    
+    if (!apiKey) {
+        apiKey = prompt('Please enter your Google Cloud Vision API Key:');
+        if (apiKey && apiKey.trim()) {
+            apiKey = apiKey.trim();
+            localStorage.setItem('gcp_vision_api_key', apiKey);
+            showMessage('API key saved to local storage!', 'success');
+        } else {
+            return null;
+        }
     }
-}
-
-// Save API key to localStorage
-function saveApiKey() {
-    const apiKey = apiKeyInput.value.trim();
-    if (apiKey) {
-        localStorage.setItem('gcp_vision_api_key', apiKey);
-        showMessage('API key saved successfully!', 'success');
-    } else {
-        showError('Please enter a valid API key');
-    }
+    
+    return apiKey;
 }
 
 
@@ -154,9 +149,9 @@ async function processImage() {
         return;
     }
 
-    const apiKey = localStorage.getItem('gcp_vision_api_key');
+    const apiKey = getApiKey();
     if (!apiKey) {
-        showError('Please enter and save your Google Cloud Vision API key first.');
+        showError('API key is required to process the image.');
         return;
     }
 
