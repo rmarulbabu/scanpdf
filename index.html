@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handwritten Note Scanner</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Quill.js Rich Text Editor -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Handwritten Note Scanner</h1>
+            <p class="subtitle">Scan, Extract, Edit & Export</p>
+        </header>
+
+        <!-- Camera Section -->
+        <section class="camera-section" id="cameraSection">
+            <div class="camera-container">
+                <video id="videoElement" autoplay playsinline></video>
+                <canvas id="canvasElement" class="hidden"></canvas>
+                <div class="camera-overlay">
+                    <div class="camera-controls">
+                        <button id="startCameraBtn" class="btn btn-primary">Start Camera</button>
+                        <button id="captureBtn" class="btn btn-capture hidden">Capture Photo</button>
+                        <button id="retakeBtn" class="btn btn-secondary hidden">Retake</button>
+                    </div>
+                </div>
+            </div>
+            <div class="preview-container hidden" id="previewContainer">
+                <img id="previewImage" alt="Captured image">
+                <div class="preview-controls">
+                    <button id="processBtn" class="btn btn-primary">Extract Text</button>
+                    <button id="retakeFromPreviewBtn" class="btn btn-secondary">Retake</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Loading Indicator -->
+        <div class="loading hidden" id="loadingIndicator">
+            <div class="spinner"></div>
+            <p>Processing image with OCR...</p>
+        </div>
+
+        <!-- Error Message -->
+        <div class="error-message hidden" id="errorMessage"></div>
+
+        <!-- API Key Configuration -->
+        <section class="api-key-section">
+            <div class="api-key-container">
+                <label for="apiKeyInput">Google Cloud Vision API Key:</label>
+                <input type="password" id="apiKeyInput" placeholder="Enter your API key">
+                <button id="saveApiKeyBtn" class="btn btn-small">Save</button>
+                <p class="api-key-hint">Your API key is stored locally and never sent to our servers.</p>
+            </div>
+        </section>
+
+        <!-- Rich Text Editor Section -->
+        <section class="editor-section hidden" id="editorSection">
+            <div class="editor-header">
+                <h2>Extracted  Text</h2>
+                <button id="exportPdfBtn" class="btn btn-success">Export to PDF</button>
+            </div>
+            <div id="editor"></div>
+        </section>
+    </div>
+
+    <!-- External Libraries -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
